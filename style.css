@@ -40,8 +40,12 @@ h1 {
         border-radius: 10px;
     }
 
-    .a3 {
+    .clear {
         background-color: var(--clear);
+    }
+
+    .not-clear {
+        background-color: var(--notclear);
     }
 
 

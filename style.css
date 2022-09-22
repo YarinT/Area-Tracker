@@ -1,10 +1,12 @@
 body {
     background-image: url("/bg.jpg");
-    background-size: 100%;
+    background-size: cover;
     background-repeat: no-repeat;
     flex-direction: column;
     overflow: hidden;
     direction: rtl;
+    height: 100vh;
+    background-position: center;
 }
 
 h1 {
@@ -64,4 +66,11 @@ h1 {
     :root {
     --clear: rgba(56, 239, 0, 0.5);
     --notclear: rgba(255, 40, 37, 0.5);
+    }
+
+/* Phone responsive */
+    @media (max-width: 1200px) {
+        body {
+           height: 100vh;
+        }
     }

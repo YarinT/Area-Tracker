@@ -1,0 +1,43 @@
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.parent {
+    display: grid;
+    grid-template-columns: 5fr 8fr;
+    grid-template-rows: repeat(2, 1fr);
+    grid-auto-rows: 32px;
+    height: 100%;
+  }
+  
+
+  .sky {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    grid-column-start: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+  }
+
+  .gps {
+    display: grid;
+    height: 100%;
+    width: 100%;
+  }
+
+  .area {
+    display: grid;
+    height: 100%;
+    width: 100%;
+  }
+
+  iframe {
+    width: 100%;
+    height: 100%;
+  }
+
+  .area > iframe {
+  }

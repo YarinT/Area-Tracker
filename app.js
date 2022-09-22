@@ -5,7 +5,7 @@ window.setTimeout(function () {
     window.location.reload();
 }, 30000);
 
-fetch('http://172.27.58.213/skyaware/data/aircraft.json')
+fetch('http://149.106.233.180/skyaware/data/aircraft.json')
     .then((response) => response.json())
     .then((data) => handleData(data));
 

@@ -1,5 +1,5 @@
 body {
-    background-image: url("/bg.jpg");
+    background-image: url("/bg.webp");
     background-size: cover;
     background-repeat: no-repeat;
     flex-direction: column;
@@ -8,6 +8,7 @@ body {
     height: 100vh;
     background-position: center;
     overflow: hidden;
+    position: relative;
 }
 
 h1 {
@@ -68,6 +69,21 @@ h1 {
     --clear: rgba(56, 239, 0, 0.5);
     --notclear: rgba(255, 40, 37, 0.5);
     }
+
+.credit {
+    position: fixed;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    bottom: 0vh;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 59, 169, 0.1);
+    border-radius: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
 
 /* Phone responsive */
     @media (max-width: 1200px) {

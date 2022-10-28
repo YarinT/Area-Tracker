@@ -19,6 +19,16 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    font-size: 10pt;
+    visibility: hidden;
+}
+
 .parent {
     font-family:Verdana, Geneva, Tahoma, sans-serif;
     display: flex;
@@ -86,8 +96,20 @@ h1 {
 }
 
 /* Phone responsive */
-    @media (max-width: 1200px) {
+    @media (max-width: 900px) {
         body {
-           height: 100vh;
+           overflow: auto;
+        }
+        .parent {
+            display: flex;
+            font-size: 15pt;
+            padding: 22px;
+            flex: 1 1 auto;
+        }
+        .credit {
+            visibility: hidden;
+        }
+        h2 {
+            visibility: visible;
         }
     }

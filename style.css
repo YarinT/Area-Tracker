@@ -99,6 +99,7 @@ h2 {
     @media (max-width: 900px) {
         body {
            overflow: auto;
+           background-attachment: fixed;
         }
         .parent {
             display: flex;

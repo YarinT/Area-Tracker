@@ -1,16 +1,38 @@
 const callsignsText = document.querySelectorAll('#callsign');
 const altsText = document.querySelectorAll('#alt');
+const statusEl = document.getElementById("status");
+const faqEl = document.getElementsByClassName("faq")
+let lastUpdated;
 
-window.setTimeout(function () {
-    window.location.reload();
-}, 30000);
 
-fetch('http://149.106.233.180/skyaware/data/aircraft.json')
-    .then((response) => response.json())
-    .then((data) => handleData(data));
 
+function updateData() {
+    statusEl.textContent = "מתחבר לשרת...";
+
+    fetch('http://149.106.233.180/skyaware/data/aircraft.json')
+    .then((response) => {
+        if(response.ok) {
+            lastUpdated = new Date().toLocaleTimeString();
+            statusEl.textContent = `מחובר לשרת. עודכן בשעה ${lastUpdated}`;
+            statusEl.style.backgroundColor = "var(--connected)"
+            return response.json();
+        }else{
+            statusEl.textContent = "Error:" + response.status;
+        }
+    })
+    .then((data) => handleData(data))
+    .catch((error) => {
+        statusEl.textContent = "אין חיבור לשרת. המידע לא עדכני!";
+        statusEl.style.backgroundColor = "var(--notclear)"
+    });
+}
+
+updateData();
+setInterval(updateData, 30000);
 
 function handleData(data) {
+    console.log(statusEl.textContent)
+
     data.aircraft.forEach(element => {
         if (element.squawk == 5103) {
             callsignsText[0].textContent = `בשימוש ע"י: ${element.flight == undefined ? 'לא זמין' : element.flight}`

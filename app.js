@@ -33,6 +33,38 @@ setInterval(updateData, 30000);
 function handleData(data) {
     console.log(statusEl.textContent)
 
+    // create a set of all the squawk codes in the data
+    let squawkCodes = new Set();
+    data.aircraft.forEach(element => {
+        squawkCodes.add(element.squawk);
+    });
+
+    // check each area to see if the corresponding squawk code is still present
+    for (let i = 0; i < 6; i++) {
+        let squawkCode;
+        if (i == 0) {
+            squawkCode = 5103;
+        } else if (i == 1) {
+            squawkCode = 5102;
+        } else if (i == 2) {
+            squawkCode = 5105;
+        } else if (i == 3) {
+            squawkCode = 5111;
+        } else if (i == 4) {
+            squawkCode = 5112;
+        } else if (i == 5) {
+            squawkCode = 5113;
+        }
+
+        // if the squawk code is not present, clear the area
+        if (!squawkCodes.has(squawkCode)) {
+            callsignsText[i].textContent = `האזור פנוי!`;
+            altsText[i].textContent = ``
+            callsignsText[i].parentElement.classList.remove('not-clear');
+            callsignsText[i].parentElement.classList.add('clear');
+        }
+    }
+
     data.aircraft.forEach(element => {
         if (element.squawk == 5103) {
             callsignsText[0].textContent = `בשימוש ע"י: ${element.flight == undefined ? 'לא זמין' : element.flight}`

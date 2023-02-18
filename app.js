@@ -29,6 +29,30 @@ function updateData() {
 
 updateData();
 setInterval(updateData, 30000);
+//Mode S callsign problems fixing...
+function GetRegNumber(rawreg) {
+    rawreg = rawreg.replace(/\s/g, ""); // Remove any whitespace characters from rawreg
+    if(rawreg === "4XCD0")
+    {
+        return "4X-CDO"
+    }
+    else if(rawreg === "CGB")
+    {
+        return "4X-CGB";
+    }
+    else if(rawreg.includes("4X"))
+    {
+        return "4X-" + rawreg.substring(2);
+    }
+    const dashCountries = ["C", "D", "EC", "F", "G", "HA", "HB", "I", "LX", "LY", "OE", "OH", "OK", "OM", "OO", "OY", "PH", "SP", "SU", "TC", "UR", "VT", "VH", "VN", "VQ", "YR", "YU", "4X", "9M", "RP", "HS", "XY"];
+    for (let i = 0; i < dashCountries.length; i++) {
+      const country = dashCountries[i];
+      if (rawreg.toUpperCase().startsWith(country)) {
+        return country + "-" + rawreg.substring(country.length);
+      }}
+    return rawreg;
+}
+
 
 function handleData(data) {
     console.log(statusEl.textContent)
@@ -62,40 +86,96 @@ function handleData(data) {
             altsText[i].textContent = ``
             callsignsText[i].parentElement.classList.remove('not-clear');
             callsignsText[i].parentElement.classList.add('clear');
+            callsignsText[i].parentElement.parentElement.style.backgroundImage = '';
         }
     }
-
+    
     data.aircraft.forEach(element => {
+
         if (element.squawk == 5103) {
+
             callsignsText[0].textContent = `בשימוש ע"י: ${element.flight == undefined ? 'לא זמין' : element.flight}`
             altsText[0].textContent = `גובה נוכחי: ${element.alt_baro} רגל`
             callsignsText[0].parentElement.classList.remove('clear');
-            callsignsText[0].parentElement.classList.add('not-clear');
+            if(element.flight != undefined) 
+            fetch(`https://imagescraper.yarintw.com/?reg=${GetRegNumber(element.flight)}`).then((response)=>{
+            response.json().then((data)=>{
+                if(data.image != undefined) {
+                    callsignsText[0].parentElement.parentElement.style.backgroundImage = `url("${data.image}")`;
+                    callsignsText[0].parentElement.classList.add('not-clear');}
+                else callsignsText[0].parentElement.classList.add('not-clear');
+            })
+            })
+
         } else if (element.squawk == 5102) {
             callsignsText[1].textContent = `בשימוש ע"י: ${element.flight == undefined ? 'לא זמין' : element.flight}`
             altsText[1].textContent = `גובה נוכחי: ${element.alt_baro} רגל`
             callsignsText[1].parentElement.classList.remove('clear');
-            callsignsText[1].parentElement.classList.add('not-clear');
+            if(element.flight != undefined) 
+            fetch(`https://imagescraper.yarintw.com/?reg=${GetRegNumber(element.flight)}`).then((response)=>{
+            response.json().then((data)=>{
+                if(data.image != undefined) {
+                    callsignsText[1].parentElement.parentElement.style.backgroundImage = `url("${data.image}")`;
+                    callsignsText[1].parentElement.classList.add('not-clear');}
+                else callsignsText[1].parentElement.classList.add('not-clear');
+            })
+            })
+
         } else if (element.squawk == 5105) {
             callsignsText[2].textContent = `בשימוש ע"י: ${element.flight == undefined ? 'לא זמין' : element.flight}`
             altsText[2].textContent = `גובה נוכחי: ${element.alt_baro} רגל`
             callsignsText[2].parentElement.classList.remove('clear');
-            callsignsText[2].parentElement.classList.add('not-clear');
+            if(element.flight != undefined) 
+            fetch(`https://imagescraper.yarintw.com/?reg=${GetRegNumber(element.flight)}`).then((response)=>{
+            response.json().then((data)=>{
+                if(data.image != undefined) {
+                    callsignsText[2].parentElement.parentElement.style.backgroundImage = `url("${data.image}")`;
+                    callsignsText[2].parentElement.classList.add('not-clear');}
+                else callsignsText[2].parentElement.classList.add('not-clear');
+            })
+            })
+
         } else if (element.squawk == 5111) {
             callsignsText[3].textContent = `בשימוש ע"י: ${element.flight == undefined ? 'לא זמין' : element.flight}`
             altsText[3].textContent = `גובה נוכחי: ${element.alt_baro} רגל`
             callsignsText[3].parentElement.classList.remove('clear');
-            callsignsText[3].parentElement.classList.add('not-clear');
+            if(element.flight != undefined) 
+            fetch(`https://imagescraper.yarintw.com/?reg=${GetRegNumber(element.flight)}`).then((response)=>{
+            response.json().then((data)=>{
+                if(data.image != undefined) {
+                    callsignsText[3].parentElement.parentElement.style.backgroundImage = `url("${data.image}")`;
+                    callsignsText[3].parentElement.classList.add('not-clear');}
+                else callsignsText[3].parentElement.classList.add('not-clear');
+            })
+            })
+
         } else if (element.squawk == 5112) {
             callsignsText[4].textContent = `בשימוש ע"י: ${element.flight == undefined ? 'לא זמין' : element.flight}`
             altsText[4].textContent = `גובה נוכחי: ${element.alt_baro} רגל`
             callsignsText[4].parentElement.classList.remove('clear');
-            callsignsText[4].parentElement.classList.add('not-clear');
+            if(element.flight != undefined) 
+            fetch(`https://imagescraper.yarintw.com/?reg=${GetRegNumber(element.flight)}`).then((response)=>{
+            response.json().then((data)=>{
+                if(data.image != undefined) {
+                    callsignsText[4].parentElement.parentElement.style.backgroundImage = `url("${data.image}")`;
+                    callsignsText[4].parentElement.classList.add('not-clear');}
+                else callsignsText[4].parentElement.classList.add('not-clear');
+            })
+            })
+
         } else if (element.squawk == 5113) {
             callsignsText[5].textContent = `בשימוש ע"י: ${element.flight == undefined ? 'לא זמין' : element.flight}`
             altsText[5].textContent = `גובה נוכחי: ${element.alt_baro} רגל`
             callsignsText[5].parentElement.classList.remove('clear');
-            callsignsText[5].parentElement.classList.add('not-clear');
+            if(element.flight != undefined) 
+            fetch(`https://imagescraper.yarintw.com/?reg=${GetRegNumber(element.flight)}`).then((response)=>{
+            response.json().then((data)=>{
+                if(data.image != undefined) {
+                    callsignsText[5].parentElement.parentElement.style.backgroundImage = `url("${data.image}")`;
+                    callsignsText[5].parentElement.classList.add('not-clear');}
+                else callsignsText[5].parentElement.classList.add('not-clear');
+            })
+            })
         }
     });
 }

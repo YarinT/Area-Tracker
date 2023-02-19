@@ -93,9 +93,9 @@ function handleData(data) {
     data.aircraft.forEach(element => {
 
         if (element.squawk == 5103) {
-
-            callsignsText[0].textContent = `בשימוש ע"י: ${element.flight == undefined ? 'לא זמין' : element.flight}`
             altsText[0].textContent = `גובה נוכחי: ${element.alt_baro} רגל`
+            if (callsignsText[0].textContent != element.flight){
+            callsignsText[0].textContent = `בשימוש ע"י: ${element.flight == undefined ? 'לא זמין' : element.flight}`
             callsignsText[0].parentElement.classList.remove('clear');
             if(element.flight != undefined) 
             fetch(`https://imagescraper.yarintw.com/?reg=${GetRegNumber(element.flight)}`).then((response)=>{
@@ -106,6 +106,7 @@ function handleData(data) {
                 else callsignsText[0].parentElement.classList.add('not-clear');
             })
             })
+        }
 
         } else if (element.squawk == 5102) {
             callsignsText[1].textContent = `בשימוש ע"י: ${element.flight == undefined ? 'לא זמין' : element.flight}`

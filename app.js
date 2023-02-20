@@ -7,7 +7,7 @@ let lastUpdated;
 function updateData() {
     //statusEl.textContent = "מתחבר לשרת...";
 
-    fetch('http://149.106.233.180/skyaware/data/aircraft.json')
+    fetch('https://pi.yarintw.com/skyaware/data/aircraft.json')
     .then((response) => {
         if(response.ok) {
             lastUpdated = new Date().toLocaleTimeString();

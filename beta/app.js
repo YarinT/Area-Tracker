@@ -4,8 +4,6 @@ const statusEl = document.getElementById("status");
 const faqEl = document.getElementsByClassName("faq")
 let lastUpdated;
 
-
-
 function updateData() {
     //statusEl.textContent = "מתחבר לשרת...";
 
@@ -48,6 +46,10 @@ function GetRegNumber(rawreg) {
     {
         return "4X-" + rawreg.substring(2);
     }
+    // else if(rawreg == "7395???")   for future refrence :)
+    // {
+    //     return "4X???";
+    // }
     const dashCountries = ["C", "D", "EC", "F", "G", "HA", "HB", "I", "LX", "LY", "OE", "OH", "OK", "OM", "OO", "OY", "PH", "SP", "SU", "TC", "UR", "VT", "VH", "VN", "VQ", "YR", "YU", "9M", "RP", "HS", "XY"];
     for (let i = 0; i < dashCountries.length; i++) {
       const country = dashCountries[i];
@@ -57,6 +59,7 @@ function GetRegNumber(rawreg) {
     return rawreg;
 }
 
+//Main Update Function
 function updateArea(AreaNO,element)
 {
     altsText[AreaNO].textContent = `גובה נוכחי: ${element.alt_baro} רגל`
@@ -68,11 +71,13 @@ function updateArea(AreaNO,element)
         if(data.image != undefined) {
             callsignsText[AreaNO].parentElement.parentElement.style.backgroundImage = `url("${data.image}")`;
             callsignsText[AreaNO].parentElement.classList.remove('clear');
-            callsignsText[AreaNO].parentElement.classList.add('not-clear');}
+            callsignsText[AreaNO].parentElement.classList.add('not-clear');
+            callsignsText[AreaNO].parentElement.style.color = "white";}
         else 
             {
             callsignsText[AreaNO].parentElement.classList.remove('clear');
             callsignsText[AreaNO].parentElement.classList.add('not-clear');
+            callsignsText[AreaNO].parentElement.style.color = "white"
             }
     })
     })
@@ -80,6 +85,7 @@ function updateArea(AreaNO,element)
     {
     callsignsText[AreaNO].parentElement.classList.remove('clear');
     callsignsText[AreaNO].parentElement.classList.add('not-clear');
+    callsignsText[AreaNO].parentElement.style.color = "white";
     }
     }
 }
@@ -114,13 +120,12 @@ function handleData(data) {
             altsText[i].textContent = ``
             callsignsText[i].parentElement.classList.remove('not-clear');
             callsignsText[i].parentElement.classList.add('clear');
+            callsignsText[i].parentElement.style.color = "black";
             callsignsText[i].parentElement.parentElement.style.backgroundImage = '';
-        }
-        
-        }
+        }}
     
     data.aircraft.forEach(element => {
-        if(element.flight !== undefined)
+        //if(element.flight !== undefined)
         switch(element.squawk){
             case "5103":
                 updateArea(0,element);

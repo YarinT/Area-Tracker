@@ -2,7 +2,7 @@
 ### **Area Tracker for LLHZ training areas!**
 
 
-**website is up and running on http://training.skyatc.live/**
+**website is up and running on https://training.skyatc.live/**
 <br>
 For aircraft data, The website is using a JSON file fetched from a Raspberry pi with piaware installed.
 This way we can use the Callsigns, altitude and transponder codes from the JSON, And match them to the areas.

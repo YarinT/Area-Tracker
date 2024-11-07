@@ -1,4 +1,4 @@
-const csvUrl = "/close2024.csv";
+const csvUrl = "/newtv/close2024.csv";
 async function fetchCsv() {
   const response = await fetch(csvUrl);
   const text = await response.text();

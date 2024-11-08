@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ערוך עדכונים</title>
-    <link rel="stylesheet" href="newtv.css" />
+    <link rel="stylesheet" href="edit.css" />
   </head>
   <body>
     <div class="parent">
-      <h2>ערוך את עדכון החדשות</h2>
+      <h2>עריכת עדכונים בטלוויזיה</h2>
       <textarea id="newsContent" rows="4" cols="50">
       </textarea>
-      <br />
-      <button onclick="updateNews()">שמור עדכונים</button> <!-- Save button -->
+      <button id="btn" onclick="updateNews()">שמור עדכונים</button> <!-- Save button -->
 
       <script src="updateNews.js"></script> <!-- External JS file to handle updates -->
     </div>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sky Dashboard</title>
+    <title>לוח בקרה - סקאי</title>
     <link rel="stylesheet" href="newtv.css" />
   </head>
   <body>
@@ -13,8 +13,18 @@
       </div>
       <div class="div2"><iframe src="https://online.t42.co.uk/"></iframe></div>
       <div class="div3">
-        <h2>טייסים, חניכים ומדריכים יקרים, שעת סגירת השדה להיום:</h2>
-        <h1 id="result">טוען...</h1>
+        <div class="time">
+          <h2>שעת סגירת השדה</h2>
+          <h1 id="result">טוען...</h1>
+          <h3 id="until">עד לתאריך...</h3>
+        </div>
+
+        <div class="news-ticker">
+          <h2>עדכונים</h2>
+          <div class="news-content" id="newsContent">
+            ברוך מצא את המפתחות | עדכון מגדל: 270/45 משבים 60
+          </div>
+        </div>
       </div>
       <div class="div4"><iframe src="https://sky10.co.il/board/"></iframe></div>
     </div>

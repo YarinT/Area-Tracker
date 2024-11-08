@@ -31,6 +31,8 @@ iframe {
   justify-content: center;
   text-align: center;
   direction: rtl;
+  display: flex;
+  align-items: flex-start
 }
 .div4 {
   grid-area: 2 / 3 / 7 / 6;
@@ -48,4 +50,47 @@ h1 {
 h2 {
   font-size: 3rem;
   font-style: italic;
+  margin-top: 0;
+}
+
+.news-ticker {
+  width: 100%;
+  overflow: hidden;
+  background-color: #2a363b;
+  color: #fff;
+  padding: 10px 0;
+  box-sizing: border-box;
+  white-space: nowrap;
+  margin-top: 30px;
+  margin-left: 20px;
+  border: white solid;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-content {
+  margin-top: -20px;
+  display: inline-block;
+  padding-left: 100%;
+  animation: slide-left 20s linear infinite;
+}
+
+/* Keyframes for the sliding effect */
+@keyframes slide-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+#newsContent {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.time {
+  width: 50%;
 }

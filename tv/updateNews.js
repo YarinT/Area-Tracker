@@ -4,7 +4,7 @@ window.onload = function() {
     .then(response => response.json())
     .then(data => {
       // Pre-populate the textarea with the current news
-      document.getElementById('newsContent').value = data.news || 'No news available.';
+      document.getElementById('newsContent').value = data.news;
     })
     .catch(error => {
       console.error('Error fetching news:', error);

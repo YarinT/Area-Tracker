@@ -6,11 +6,10 @@ window.onload = function() {
         .then(response => response.json())
         .then(data => {
           // Update the news content in the newsContent div
-          document.getElementById('newsContent').textContent = data.news || 'No news available.';
+          document.getElementById('newsContent').textContent = data.news || 'אין עדכונים חדשים.';
         })
         .catch(error => {
-          console.error('Error fetching news:', error);
-          document.getElementById('newsContent').textContent = 'Error loading news.';
+          document.getElementById('newsContent').textContent = 'שגיאה בטעינת העדכונים';
         });
     }
   

@@ -10,7 +10,7 @@ iframe {
 .parent {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(5, 1fr);
+  grid-template-rows: repeat(8, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   height: 100vh;
@@ -28,12 +28,11 @@ iframe {
   display: flex;
   align-items: center;
 }
-.div2 {
-  grid-area: 2 / 1 / 6 / 4;
-}
-.div3 {
-  grid-area: 2 / 4 / 6 / 7;
-}
+.div2 { grid-area: 2 / 1 / 6 / 4; }
+.div3 { grid-area: 6 / 1 / 9 / 4; }
+.div4 { grid-area: 2 / 4 / 9 / 7; }
+
+
 
 h1 {
   font-size: 9rem;

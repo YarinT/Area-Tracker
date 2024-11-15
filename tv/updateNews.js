@@ -1,4 +1,6 @@
 let updates = [];
+let draggedItem = null;
+let draggedIndex = null;
 
 // Load existing updates
 window.onload = function() {
@@ -19,8 +21,8 @@ function addUpdate() {
     const text = input.value.trim();
     
     if (text) {
-        updates.unshift(text); // Add to beginning of array
-        input.value = ''; // Clear input
+        updates.push(text);
+        input.value = '';
         renderUpdates();
     }
 }
@@ -48,14 +50,23 @@ function renderUpdates() {
     updates.forEach((update, index) => {
         const li = document.createElement('li');
         li.className = 'update-item';
+        li.draggable = true;
         
         li.innerHTML = `
+            <div class="drag-handle">☰</div>
             <span>${update}</span>
             <div class="update-controls">
                 <button class="edit-btn" onclick="editUpdate(${index})">ערוך</button>
                 <button class="delete-btn" onclick="deleteUpdate(${index})">מחק</button>
             </div>
         `;
+        
+        // Add drag event listeners
+        li.addEventListener('dragstart', handleDragStart);
+        li.addEventListener('dragover', handleDragOver);
+        li.addEventListener('drop', handleDrop);
+        li.addEventListener('dragenter', handleDragEnter);
+        li.addEventListener('dragleave', handleDragLeave);
         
         list.appendChild(li);
     });
@@ -81,5 +92,50 @@ function saveUpdates() {
     .catch(error => {
         console.error('Error:', error);
         alert('אירעה שגיאה בעת שמירת העדכונים');
+    });
+}
+
+function handleDragStart(e) {
+    draggedItem = e.target;
+    draggedIndex = Array.from(draggedItem.parentNode.children).indexOf(draggedItem);
+    setTimeout(() => draggedItem.classList.add('dragging'), 0);
+}
+
+function handleDragOver(e) {
+    e.preventDefault();
+}
+
+function handleDragEnter(e) {
+    e.preventDefault();
+    const item = e.target.closest('.update-item');
+    if (item && item !== draggedItem) {
+        item.classList.add('drag-over');
+    }
+}
+
+function handleDragLeave(e) {
+    const item = e.target.closest('.update-item');
+    if (item) {
+        item.classList.remove('drag-over');
+    }
+}
+
+function handleDrop(e) {
+    e.preventDefault();
+    const dropTarget = e.target.closest('.update-item');
+    
+    if (dropTarget && dropTarget !== draggedItem) {
+        const dropIndex = Array.from(dropTarget.parentNode.children).indexOf(dropTarget);
+        
+        // Reorder the updates array
+        const [movedItem] = updates.splice(draggedIndex, 1);
+        updates.splice(dropIndex, 0, movedItem);
+        
+        renderUpdates();
+    }
+    
+    // Clean up
+    document.querySelectorAll('.update-item').forEach(item => {
+        item.classList.remove('drag-over', 'dragging');
     });
 }

@@ -75,7 +75,7 @@ h2 {
   justify-content: center;
 }
 
-.news-item {
+.news-item, .news-content {
   font-size: 85px;
   font-weight: bold;
   position: absolute;
@@ -83,7 +83,6 @@ h2 {
   text-align: center;
   padding: 0 20px;
   box-sizing: border-box;
-  opacity: 0;
 }
 
 @keyframes slide-fade {

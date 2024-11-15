@@ -10,12 +10,22 @@
   <body>
     <div class="parent">
       <h2>עריכת עדכונים בטלוויזיה</h2>
-      <textarea id="newsContent" rows="4" cols="50"> </textarea>
-      <button id="btn" onclick="updateNews()">שמור עדכונים</button>
-      <!-- Save button -->
+      
+      <!-- Add new update section -->
+      <div class="add-update">
+        <input type="text" id="newUpdate" placeholder="הכנס עדכון חדש...">
+        <button onclick="addUpdate()">הוסף עדכון</button>
+      </div>
 
-      <script src="updateNews.js"></script>
-      <!-- External JS file to handle updates -->
+      <!-- Current updates list -->
+      <div class="updates-list">
+        <h3>עדכונים נוכחיים:</h3>
+        <ul id="updatesList"></ul>
+      </div>
+
+      <button id="saveBtn" onclick="saveUpdates()">שמור את כל העדכונים</button>
     </div>
+
+    <script src="updateNews.js"></script>
   </body>
 </html>

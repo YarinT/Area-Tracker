@@ -1,22 +1,49 @@
-// Fetch the latest news content every 30 seconds
-window.onload = function() {
-    // Function to fetch and update the news content
-    function updateNewsContent() {
-      fetch('newsContent.json')
-        .then(response => response.json())
-        .then(data => {
-          // Update the news content in the newsContent div
-          document.getElementById('newsContent').textContent = data.news || 'אין עדכונים חדשים.';
-        })
-        .catch(error => {
-          document.getElementById('newsContent').textContent = 'שגיאה בטעינת העדכונים';
-        });
+window.onload = function () {
+  const newsContentElement = document.getElementById("newsContent");
+  let currentIndex = 0;
+  let newsItems = [];
+
+  function updateNewsContent() {
+    fetch("newsContent.json" + "?t=" + new Date().getTime())
+      .then((response) => response.json())
+      .then((data) => {
+        newsItems = data || ["אין עדכונים חדשים."];
+        displayNextNewsItem();
+      })
+      .catch((error) => {
+        console.error('Error fetching news:', error);
+        newsContentElement.textContent = "שגיאה בטעינת העדכונים";
+      });
+  }
+
+  function displayNextNewsItem() {
+    if (newsItems.length > 0) {
+      // If only one update, display it without animation
+      if (newsItems.length === 1) {
+        newsContentElement.classList.remove('animate', 'multiple-updates');
+        newsContentElement.textContent = newsItems[0];
+        return;
+      }
+
+      // Multiple updates - show with animation
+      newsContentElement.classList.remove('animate', 'multiple-updates');
+      void newsContentElement.offsetWidth; // Trigger reflow to restart animation
+      newsContentElement.textContent = newsItems[currentIndex];
+      newsContentElement.classList.add('animate', 'multiple-updates');
+      currentIndex = (currentIndex + 1) % newsItems.length;
     }
+  }
+
+  // Initial load
+  updateNewsContent();
   
-    // Call the function once when the page loads
-    updateNewsContent();
+  // Check for updates every 5 seconds
+  setInterval(updateNewsContent, 5000);
   
-    // Set an interval to refresh the news every 30 seconds (10000 ms)
-    setInterval(updateNewsContent, 30000); // Adjust the time as needed
-  };
-  
+  // Display interval for multiple updates
+  setInterval(() => {
+    if (newsItems.length > 1) {
+      displayNextNewsItem();
+    }
+  }, 5000);
+};

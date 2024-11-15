@@ -2,13 +2,16 @@ window.onload = function () {
   const newsContentElement = document.getElementById("newsContent");
   let currentIndex = 0;
   let newsItems = [];
+  let isAnimating = false;
 
   function updateNewsContent() {
     fetch("newsContent.json" + "?t=" + new Date().getTime())
       .then((response) => response.json())
       .then((data) => {
         newsItems = data || ["אין עדכונים חדשים."];
-        displayNextNewsItem();
+        if (currentIndex === 0) {
+          displayNextNewsItem();
+        }
       })
       .catch((error) => {
         console.error('Error fetching news:', error);
@@ -17,7 +20,7 @@ window.onload = function () {
   }
 
   function displayNextNewsItem() {
-    if (newsItems.length > 0) {
+    if (newsItems.length > 0 && !isAnimating) {
       // If only one update, display it without animation
       if (newsItems.length === 1) {
         newsContentElement.classList.remove('animate', 'multiple-updates');
@@ -26,24 +29,32 @@ window.onload = function () {
       }
 
       // Multiple updates - show with animation
-      newsContentElement.classList.remove('animate', 'multiple-updates');
-      void newsContentElement.offsetWidth; // Trigger reflow to restart animation
-      newsContentElement.textContent = newsItems[currentIndex];
-      newsContentElement.classList.add('animate', 'multiple-updates');
-      currentIndex = (currentIndex + 1) % newsItems.length;
+      isAnimating = true;
+
+      // Create and append next update element
+      const nextIndex = (currentIndex + 1) % newsItems.length;
+      const nextUpdate = document.createElement('div');
+      nextUpdate.className = 'news-item animate multiple-updates';
+      nextUpdate.textContent = newsItems[nextIndex];
+      
+      // Clear and update content
+      newsContentElement.innerHTML = '';
+      newsContentElement.appendChild(nextUpdate);
+
+      // Update current index
+      currentIndex = nextIndex;
+
+      // Reset animation flag after animation completes
+      setTimeout(() => {
+        isAnimating = false;
+        displayNextNewsItem();
+      }, 5000);
     }
   }
 
   // Initial load
   updateNewsContent();
   
-  // Check for updates every 5 seconds
-  setInterval(updateNewsContent, 5000);
-  
-  // Display interval for multiple updates
-  setInterval(() => {
-    if (newsItems.length > 1) {
-      displayNextNewsItem();
-    }
-  }, 5000);
+  // Check for new content every 10 seconds
+  setInterval(updateNewsContent, 10000);
 };

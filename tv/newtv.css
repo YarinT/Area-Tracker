@@ -84,6 +84,7 @@ h2 {
   text-align: center;
   padding: 0 20px;
   box-sizing: border-box;
+  opacity: 0;
 }
 
 @keyframes slide-fade {
@@ -106,5 +107,5 @@ h2 {
 }
 
 .animate.multiple-updates {
-  animation: slide-fade 5s ease-in-out;
+  animation: slide-fade 5s ease-in-out forwards;
 }

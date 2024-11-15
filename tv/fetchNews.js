@@ -21,30 +21,28 @@ window.onload = function () {
 
   function displayNextNewsItem() {
     if (newsItems.length > 0 && !isAnimating) {
-      // If only one update, display it without animation
       if (newsItems.length === 1) {
         newsContentElement.classList.remove('animate', 'multiple-updates');
         newsContentElement.textContent = newsItems[0];
         return;
       }
 
-      // Multiple updates - show with animation
       isAnimating = true;
 
-      // Create and append next update element
       const nextIndex = (currentIndex + 1) % newsItems.length;
       const nextUpdate = document.createElement('div');
-      nextUpdate.className = 'news-item animate multiple-updates';
+      nextUpdate.className = 'news-item';
       nextUpdate.textContent = newsItems[nextIndex];
+      nextUpdate.style.opacity = '0';
       
-      // Clear and update content
       newsContentElement.innerHTML = '';
       newsContentElement.appendChild(nextUpdate);
 
-      // Update current index
+      void nextUpdate.offsetWidth;
+      nextUpdate.classList.add('animate', 'multiple-updates');
+
       currentIndex = nextIndex;
 
-      // Reset animation flag after animation completes
       setTimeout(() => {
         isAnimating = false;
         displayNextNewsItem();
@@ -52,9 +50,6 @@ window.onload = function () {
     }
   }
 
-  // Initial load
   updateNewsContent();
-  
-  // Check for new content every 10 seconds
   setInterval(updateNewsContent, 10000);
 };

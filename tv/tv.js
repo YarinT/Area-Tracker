@@ -1,4 +1,5 @@
 const csvUrl = "/tv/close2025.csv";
+
 async function fetchCsv() {
   const response = await fetch(csvUrl);
   const text = await response.text();
@@ -40,4 +41,9 @@ async function displayRelevantTime() {
   resultElement.innerText = relevantTime;
   untilEl.innerText = `עד לתאריך ${endDate}`;
 }
+
+// Auto-refresh every minute (60000ms)
+setInterval(displayRelevantTime, 60000);
+
+// Initial call to set the time immediately when the page loads
 displayRelevantTime();

@@ -17,6 +17,17 @@ iframe {
   overflow: hidden;
 }
 
+/* מדגיש את שעת ה"לאחר מכן" באדום על רקע צהוב */
+.time-pill{
+  color:#d00;          /* אדום */
+  background:#ff0;     /* צהוב */
+  padding:0 .35em;
+  border-radius:.35em;
+  font-weight:700;
+  white-space:nowrap;
+}
+
+
 .div1 {
   grid-area: 1 / 1 / 2 / 7;
   font-family: Arimo, sans-serif;
